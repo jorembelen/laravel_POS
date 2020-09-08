@@ -28,6 +28,8 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 
     Route::resource('customers', 'CustomerController');
 
+    Route::resource('orders', 'OrderController');
+
     Route::get('/settings', 'SettingController@index')->name('settings.index');
     Route::post('/settings', 'SettingController@store')->name('settings.store');
 

@@ -18,6 +18,12 @@
 
   @yield('css')
 
+    <script>
+        window.APP = <?php echo json_encode([
+            'currency_symbol' => config('settings.currency_symbol')
+        ]) ?>
+    </script>
+
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -15,10 +16,16 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::latest()->paginate(10);
-
+        $products = new Product();
+        if ($request->search) {
+            $products = $products->where('name', 'LIKE', "%{$request->search}%");
+        }
+        $products = $products->latest()->paginate(10);
+        if (request()->wantsJson()) {
+            return ProductResource::collection($products);
+        }
         return view('products.index')->with('products', $products);
     }
 
