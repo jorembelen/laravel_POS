@@ -54,6 +54,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="access_code" class="col-md-4 col-form-label text-md-right">{{ __('Access Code') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="access_code" type="text" class="form-control @error('access_code') is-invalid @enderror" name="access_code" value="{{ old('access_code') }}" required autocomplete="access_code" autofocus>
+
+                                @error('access_code')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

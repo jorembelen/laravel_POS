@@ -29,6 +29,7 @@ class Cart extends Component {
         this.handleClickSubmit = this.handleClickSubmit.bind(this)
     }
 
+   
     componentDidMount() {
         // load user cart
         this.loadCart();
@@ -183,7 +184,7 @@ class Cart extends Component {
                                 className="form-control"
                                 onChange={this.setCustomerId}
                             >
-                                <option value="">Walking Customer</option>
+                                <option value="">Walk In Customer</option>
                                 {customers.map(cus => (
                                     <option
                                         key={cus.id}
@@ -289,7 +290,7 @@ class Cart extends Component {
                                 key={p.id}
                                 className="item"
                             >
-                                <img src={p.image_url} alt="" />
+                                <img src={p.image_url} alt=""/>
                                 <h5>{p.name}</h5>
                             </div>
                         ))}
@@ -305,3 +306,6 @@ export default Cart;
 if (document.getElementById("cart")) {
     ReactDOM.render(<Cart />, document.getElementById("cart"));
 }
+
+  
+ 

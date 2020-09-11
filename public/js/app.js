@@ -69017,6 +69017,8 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  * code may be modified to fit the specific needs of your application.
  */
 
+window.Swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+
 try {
   window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
   window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
@@ -69372,7 +69374,7 @@ var Cart = /*#__PURE__*/function (_Component) {
         onChange: this.setCustomerId
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: ""
-      }, "Walking Customer"), customers.map(function (cus) {
+      }, "Walk In Customer"), customers.map(function (cus) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: cus.id,
           value: cus.id
@@ -69483,8 +69485,8 @@ if (document.getElementById("cart")) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Laravel\pos\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Laravel\pos\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\pos\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\pos\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
