@@ -53,16 +53,7 @@ class ProductController extends Controller
             $image_path = $request->file('image')->store('products');
         }
 
-        // if($request->hasfile('image')) {
-        //     $file = $request->file('image');
-        //     // get the name of the image
-        //     $extension = $file->getClientOriginalExtension();
-        //     $filename['imagename'] = time() . '.' .$extension;
-
-        //     // dd($filename);
-        //     $destinationPath = public_path('/images/uploads/', $filename);
-        //     $file->move($destinationPath, $filename['imagename']);
-        // }
+        
 
         $product = Product::create([
             'name' => $request->name,
@@ -129,22 +120,6 @@ class ProductController extends Controller
             $product->image = $image_path;
         }
 
-        // if($request->hasfile('image')) {
-        //     $file = $request->file('image');
-
-        //     // Delete old image from file
-        //    if($assets->image != '') {
-        //     unlink(public_path('/images/uploads/') . $assets->image);
-
-        //    }
-        //     // get the name of the image
-        //     $extension = $file->getClientOriginalExtension();
-        //     $filename['imagename'] = time() . '.' .$extension;
-
-        //     // dd($filename);
-        //     $destinationPath = public_path('/images/uploads/', $filename);
-        //     $file->move($destinationPath, $filename['imagename']);
-        // }
 
         if (!$product->save()) {
             return redirect()->back()->with('error', 'Sorry, there\'re a problem while updating product.');
