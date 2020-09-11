@@ -109,6 +109,9 @@ class ProductController extends Controller
         $product->quantity = $request->quantity;
         $product->status = $request->status;
 
+        // To reconnect the storage link
+        // rm public storage
+        
         if ($request->hasFile('image')) {
             // Delete old image
             if ($product->image) {
