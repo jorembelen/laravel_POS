@@ -35,6 +35,7 @@ class Cart extends Component {
         this.loadCart();
         this.loadProducts();
         this.loadCustomers();
+        this.loadPayment();
     }
 
     loadCustomers() {
@@ -62,6 +63,13 @@ class Cart extends Component {
         axios.get("/admin/cart").then(res => {
             const cart = res.data;
             this.setState({ cart });
+        });
+    }
+
+    loadPayment() {
+        axios.get("/admin/payment/{order}").then(res => {
+            const cart = res.data;
+            this.setState({ orders });
         });
     }
 
@@ -172,6 +180,7 @@ class Cart extends Component {
                             <form onSubmit={this.handleScanBarcode}>
                                 <input
                                     type="text"
+                                    name="code"
                                     className="form-control"
                                     placeholder="Scan Barcode..."
                                     value={barcode}

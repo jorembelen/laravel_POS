@@ -21,6 +21,11 @@ class Order extends Model
         return $this->hasMany(Payment::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);
@@ -34,10 +39,17 @@ class Order extends Model
         return 'Walk In Customer';
     }
 
+    public function getUserName()
+    {
+        if($this->user) {
+            return $this->user->first_name;
+        }
+    }
+
     public function total()
     {
         return $this->items->map(function ($i) {
-            return $i->price;
+            return $i->price * $i->quantity;
         })->sum();
     }
 

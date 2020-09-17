@@ -47,23 +47,25 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
-        $image_path = '';
+        $input = $request->all();
+  
+        if($request->hasfile('image')) {
+           $file = $request->file('image');
+           // get the name of the image
+           $extension = $file->getClientOriginalExtension();
+           $filename['imagename'] = time() . '.' .$extension;
 
-        if ($request->hasFile('image')) {
-            $image_path = $request->file('image')->store('products');
+           // dd($filename);
+           $destinationPath = public_path('/images/uploads/', $filename);
+           $file->move($destinationPath, $filename['imagename']);
+
+           $input['image'] = $filename['imagename'];
+
         }
 
-        
+        $product = Product::create($input);
 
-        $product = Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' =>  $image_path,
-            'barcode' => $request->barcode,
-            'price' => $request->price,
-            'quantity' => $request->quantity,
-            'status' => $request->status
-        ]);
+        
 
         if (!$product) {
             return redirect()->back()->with('error', 'Sorry, theres a problem while creating product.');
@@ -112,15 +114,23 @@ class ProductController extends Controller
         // To reconnect the storage link
         // rm public storage
         
-        if ($request->hasFile('image')) {
-            // Delete old image
-            if ($product->image) {
-                Storage::delete($product->image);
-            }
-            // Store image
-            $image_path = $request->file('image')->store('products');
-            // Save to Database
-            $product->image = $image_path;
+        if($request->hasfile('image')) {
+            $file = $request->file('image');
+
+            // Delete old image from file
+           if($product->image != '') {
+            unlink(public_path('/images/uploads/') . $product->image);
+
+           }
+            // get the name of the image
+            $extension = $file->getClientOriginalExtension();
+            $filename['imagename'] = time() . '.' .$extension;
+
+            // dd($filename);
+            $destinationPath = public_path('/images/uploads/', $filename);
+            $file->move($destinationPath, $filename['imagename']);
+
+            $product->image = $filename['imagename'];
         }
 
 
@@ -139,7 +149,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         if ($product->image) {
-            Storage::delete($product->image);
+            unlink(public_path('/images/uploads/') . $product->image);
         }
         $product->delete();
 

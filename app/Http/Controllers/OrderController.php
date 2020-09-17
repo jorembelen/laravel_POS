@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderStoreRequest;
 use App\Models\Order;
+use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
 
     public function index(Request $request)
     {
+        
         $orders = new Order();
 
         if($request->start_date) {
@@ -56,6 +58,14 @@ class OrderController extends Controller
             'amount' => $request->amount,
             'user_id' => $request->user()->id,
         ]);
+        
         return 'success';
+    }
+
+    public function payment($order)
+    {
+        $orders = Order::with(['items', 'payments', 'customer'])->find($order);
+
+        return view('orders.payment', compact('orders'));
     }
 }

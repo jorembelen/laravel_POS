@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return url('/home');
+// });
+
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
@@ -40,5 +42,7 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::post('/cart/change-qty', 'CartController@changeQty');
     Route::delete('/cart/delete', 'CartController@delete');
     Route::delete('/cart/empty', 'CartController@empty');
+
+    Route::get('/payment/{order}', 'OrderController@payment')->name('payment.view');
 
 });

@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$product->name}}</td>
-                    <td><img src="{{ Storage::url($product->image) }}" alt="" width="75"></td>
+                    <td><img src="{{url('../')}}/images/uploads/{{ $product->image }}" alt="" width="50"></td>
                     <td>{{$product->barcode}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->quantity}}</td>

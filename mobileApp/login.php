@@ -9,11 +9,16 @@ $access_code = $_POST['access_code'];
 $sql = mysqli_query($conn, "SELECT * FROM users WHERE first_name='$username' AND access_code='$access_code'");
 
 
-$row=mysqli_num_rows($sql);
-if($row >0) {
-    echo "Success!";
+if($result=mysqli_fetch_array($sql))
+{
+    
+    echo $result['id'];
+
 }else{ 
+
     echo "Failed";
 }
+
+mysqli_close($conn);
 
 ?>
